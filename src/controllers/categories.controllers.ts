@@ -1,8 +1,11 @@
 import type { NextFunction, Request, Response } from "express";
+import { z } from "zod";
+
 import { CategoriesService } from "../services/categories.service";
 import { CategoriesRepository } from "../database/repositories/categories.repository";
 import { CategoryModel } from "../database/schemas/category.schema";
 import type { CreateCategoryDTO } from "../dtos/categories.dto";
+import { StatusCodes } from "http-status-codes";
 
 export class CategoriesController {
 	async create(
@@ -19,7 +22,7 @@ export class CategoriesController {
 
 			const result = await service.create({ title, color });
 
-			return res.status(201).json(result);
+			return res.status(StatusCodes.CREATED).json(result);
 		} catch (err) {
 			next(err);
 		}
