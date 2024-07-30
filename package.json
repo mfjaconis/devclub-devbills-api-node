@@ -1,0 +1,37 @@
+{
+  "name": "devbills-api",
+  "version": "1.0.0",
+  "description": "DevBills API - Controle sua vida financeira pessoal de forma rápida e fácil",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch ./src/server.ts",
+    "biome:check": "biome check .",
+    "biome:format": "biome format ."
+  },
+  "keywords": [],
+  "author": {
+    "name": "Matheus Fernandes Jaconis",
+    "email": "matheusjaconis@gmail.com",
+    "url": "https://github.com/mfjaconis"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/node": "^20.14.12",
+    "globals": "^15.8.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "dotenv": "^16.4.5",
+    "esbuild-wasm": "^0.23.0",
+    "express": "^4.19.2",
+    "glob": "^11.0.0",
+    "http-status-codes": "^2.3.0",
+    "inflight": "^1.0.6",
+    "mongoose": "^8.5.1",
+    "rimraf": "^6.0.1"
+  }
+}
