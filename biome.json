@@ -6,7 +6,19 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"lint/complexity/noThisInStatic": {
+				"level": "off",
+				"meta": {
+					"ignoreReason": "This rule is disabled because our codebase requires the use of 'this' within static methods for certain design patterns."
+				}
+			},
+			"lint/complexity/noStaticOnlyClass": {
+				"level": "off",
+				"meta": {
+					"ignoreReason": "This rule is disabled because we have classes that are intentionally designed to contain only static members."
+				}
+			}
 		}
 	}
 }
