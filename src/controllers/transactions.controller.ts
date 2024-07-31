@@ -1,7 +1,10 @@
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import type { TransactionsService } from "../services/transactions.service";
-import type { CreateTransactionDTO } from "../dtos/transactions.dto";
+import type {
+	CreateTransactionDTO,
+	IndexTransactionsDTO,
+} from "../dtos/transactions.dto";
 
 export class TransactionsController {
 	constructor(private transactionsService: TransactionsService) {}
@@ -28,13 +31,23 @@ export class TransactionsController {
 		}
 	};
 
-	// index = async (_: Request, res: Response, next: NextFunction) => {
-	// 	try {
-	// 		const result = await this.transactionsService.index();
+	index = async (
+		req: Request<unknown, unknown, unknown, IndexTransactionsDTO>,
+		res: Response,
+		next: NextFunction,
+	) => {
+		try {
+			const { title, categoryId, beginDate, endDate } = req.query;
+			const result = await this.transactionsService.index({
+				title,
+				categoryId,
+				beginDate,
+				endDate,
+			});
 
-	// 		return res.status(StatusCodes.OK).json(result);
-	// 	} catch (err) {
-	// 		next(err);
-	// 	}
-	// };
+			return res.status(StatusCodes.OK).json(result);
+		} catch (err) {
+			next(err);
+		}
+	};
 }
