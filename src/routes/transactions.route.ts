@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { ParamsType, validator } from "../middleware/validator.middleware";
-import { createTransactionSchema } from "../dtos/transactions.dto";
+import {
+	createTransactionSchema,
+	getDashboardSchema,
+	indexTransactionSchema,
+} from "../dtos/transactions.dto";
 import { TransactionsController } from "../controllers/transactions.controller";
 import { TransactionsFactory } from "../factories/transactions.factory";
 
@@ -10,8 +14,6 @@ const controller = new TransactionsController(
 	TransactionsFactory.getServiceInstance(),
 );
 
-transactionsRoutes.get("/", controller.index);
-
 transactionsRoutes.post(
 	"/",
 	validator({
@@ -19,4 +21,22 @@ transactionsRoutes.post(
 		type: ParamsType.BODY,
 	}),
 	controller.create,
+);
+
+transactionsRoutes.get(
+	"/",
+	validator({
+		schema: indexTransactionSchema,
+		type: ParamsType.QUERY,
+	}),
+	controller.index,
+);
+
+transactionsRoutes.get(
+	"/dashboard",
+	validator({
+		schema: getDashboardSchema,
+		type: ParamsType.QUERY,
+	}),
+	controller.getDashboard,
 );
