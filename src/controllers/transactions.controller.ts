@@ -4,6 +4,7 @@ import type { TransactionsService } from "../services/transactions.service";
 import type {
 	CreateTransactionDTO,
 	GetDashboardDTO,
+	GetFinancialEvolutionDTO,
 	IndexTransactionsDTO,
 } from "../dtos/transactions.dto";
 
@@ -62,6 +63,23 @@ export class TransactionsController {
 			const result = await this.transactionsService.getDashboard({
 				beginDate,
 				endDate,
+			});
+
+			return res.status(StatusCodes.OK).json(result);
+		} catch (err) {
+			next(err);
+		}
+	};
+
+	getFinancialEvolution = async (
+		req: Request<unknown, unknown, unknown, GetFinancialEvolutionDTO>,
+		res: Response,
+		next: NextFunction,
+	) => {
+		try {
+			const { year } = req.query;
+			const result = await this.transactionsService.getFinancialEvolution({
+				year,
 			});
 
 			return res.status(StatusCodes.OK).json(result);
