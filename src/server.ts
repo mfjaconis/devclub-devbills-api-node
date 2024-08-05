@@ -1,10 +1,10 @@
+import cors from "cors";
 import "dotenv/config";
 import express, { json } from "express";
-import cors from "cors";
 
-import { routes } from "./routes";
 import { setupMongo } from "./database";
 import { errorHandler } from "./middleware/error-handler.middleware";
+import { routes } from "./routes";
 
 setupMongo().then(() => {
 	const app = express();
